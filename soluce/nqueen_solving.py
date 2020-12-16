@@ -11,7 +11,12 @@ def addQueen(board, row, coll):
 
 
 def can_t_attack(taille, board):
-    print("todo")
+    for i in range(taille):
+        for j in range(taille):
+            if board[i][j] == 1:
+                if not isSafe(board, i, j, taille):
+                    return False
+    return True
 
 
 def is_soluce(taille, board):
@@ -59,3 +64,4 @@ def isSafe(board, row, col, taille):  # row and col from the queen's vew
         for j in range(col, 0, -1):
             if board[i][j] == 1:
                 return False
+    return True
