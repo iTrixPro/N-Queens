@@ -48,8 +48,8 @@ def isSafe(board, row, col, taille):  # row and col from the queen's vew
     for i in range(row + 1, taille):
         if board[i][col] == 1:
             return False
-    for i in range(row, 0, -1):
-        for j in range(col, 0, -1):
+    for i in range(row, -1, -1):
+        for j in range(col, -1, -1):
             if board[i][j] == 1:
                 return False
     for i in range(row, 0, -1):
@@ -61,7 +61,7 @@ def isSafe(board, row, col, taille):  # row and col from the queen's vew
             if board[i][j] == 1:
                 return False
     for i in range(row, taille, +1):
-        for j in range(col, 0, -1):
+        for j in range(col, -1, -1):
             if board[i][j] == 1:
                 return False
     return True
