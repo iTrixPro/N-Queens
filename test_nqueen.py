@@ -116,12 +116,11 @@ class TestMedium:
         board, solved = solve_n_queen_small(board_size, board)
         assert solved
         t2 = time.time()
-        print(f"\nTest of size {board_size} took {t2-t1} seconds to be solved")
+        print(f"\nTest of size {board_size} took {t2 - t1} seconds to be solved")
 
         is_a_soluce, nb_queen = is_soluce(board_size, board)
         assert is_a_soluce
         assert nb_queen == board_size
-
 
     @pytest.mark.parametrize("board_size", [20, 30, 50])
     def test_solve_N_x_N(self, board_size):
@@ -131,7 +130,7 @@ class TestMedium:
         board, solved = solve_n_queen_big(board_size, board)
         assert solved
         t2 = time.time()
-        print(f"\nTest of size {board_size} took {t2-t1} seconds to be solved")
+        print(f"\nTest of size {board_size} took {t2 - t1} seconds to be solved")
 
 
 class TestBig:
@@ -143,11 +142,11 @@ class TestBig:
         board, solved = solve_n_queen_big(board_size, board)
         assert solved
         t2 = time.time()
-        print(f"\nTest of size {board_size} took {t2-t1} seconds to be solved")
+        print(f"\nTest of size {board_size} took {t2 - t1} seconds to be solved")
 
 
 class TestAllSoluce:
-    @pytest.mark.parametrize("board_size, nb_soluce", [(4,2), (5,10), (6,4), (7,40), (8,92)])
+    @pytest.mark.parametrize("board_size, nb_soluce", [(4, 2), (5, 10), (6, 4), (7, 40), (8, 92)])
     def test_solve_N_x_N(self, board_size, nb_soluce):
         board = generate_board(board_size)
         boards = solve_n_queen_all_soluce(board_size, board)

@@ -1,46 +1,41 @@
+def print_board(taille, board):
+    for i in range(taille):
+        for j in range(taille):
+            print(board[i][j], end='')
+        print()
 
-class Jeu:  # Class defining the bord & rules
 
-    def __init__(self, board):
-        self.board = board
-        self.taille = len(self.board[0])
+def addQueen(board, row, coll):
+    if isSafe(row, coll) is True and board[row][coll] != 1:
+        board[row][coll] = 1
 
-    def printBord(self):
-        for i in range(self.taille):
-            for j in range(self.taille):
-                print(self.board[i][j], end='')
-            print()
 
-    def addQueen(self, row, coll):
-        if self.isSafe(row, coll) is True and self.board[row][coll] != 1:
-            self.board[row][coll] = 1
-
-    def isSafe(self, row, col):  # row and col from the queen's vew
-        for i in range(col):
-            if self.board[row][i] == 1:
+def isSafe(board, row, col, taille):  # row and col from the queen's vew
+    for i in range(col):
+        if board[row][i] == 1:
+            return False
+    for i in range(col + 1, taille):
+        if board[row][i] == 1:
+            return False
+    for i in range(row):
+        if board[i][col] == 1:
+            return False
+    for i in range(row + 1, taille):
+        if board[i][col] == 1:
+            return False
+    for i in range(row, 0, -1):
+        for j in range(col, 0, -1):
+            if board[i][j] == 1:
                 return False
-        for i in range(col + 1, self.taille):
-            if self.board[row][i] == 1:
+    for i in range(row, 0, -1):
+        for j in range(col, taille, +1):
+            if board[i][j] == 1:
                 return False
-        for i in range(row):
-            if self.board[i][col] == 1:
+    for i in range(row, taille, +1):
+        for j in range(col, taille, +1):
+            if board[i][j] == 1:
                 return False
-        for i in range(row + 1, self.taille):
-            if self.board[i][col] == 1:
+    for i in range(row, taille, +1):
+        for j in range(col, 0, -1):
+            if board[i][j] == 1:
                 return False
-        for i in range(row, 0, -1):
-            for j in range(col, 0, -1):
-                if self.board[i][j] == 1:
-                    return False
-        for i in range(row, 0, -1):
-            for j in range(col, self.taille, +1):
-                if self.board[i][j] == 1:
-                    return False
-        for i in range(row, self.taille, +1):
-            for j in range(col, self.taille, +1):
-                if self.board[i][j] == 1:
-                    return False
-        for i in range(row, self.taille, +1):
-            for j in range(col, 0, -1):
-                if self.board[i][j] == 1:
-                    return False
