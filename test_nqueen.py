@@ -1,6 +1,6 @@
 import pytest
 import time
-from nqueen_solving import *
+from soluce.nqueen_solving import *
 
 
 def generate_board(size):
