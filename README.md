@@ -1,2 +1,4 @@
 # N-Queens
-Implementation of the eight queens puzzle
+
+* Marwan MEZROUI 
+* Victor BULTEZ
