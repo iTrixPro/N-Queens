@@ -1,18 +1,16 @@
-
 def backtrack(board, col, taille):
-    if col >= taille:
-        return True
+    if col == taille:
+        return True, board
 
     for i in range(taille):
 
-        if can_t_attack_check(board, i, col, taille) is True:
+        if can_t_attack_check(board, col, i, taille) is True:
             board[i][col] = 1
-            if backtrack(board, col + 1, taille) is True:
-                return True
-            print_board_debug(taille, board)
+            rep, board = backtrack(board, col + 1, taille)
+            if rep is True:
+                return True, board
             board[i][col] = 0
-            print_board_debug(taille, board)
-    return False
+    return False, board
 
 
 def addQueen(board, row, coll):

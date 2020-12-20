@@ -36,10 +36,8 @@ def is_soluce(taille, board):
 
 
 def solve_n_queen_small(taille, board):
-    soluce = board
-    soluce[0][0] = 1
-    rep = backtrack(soluce, 0, taille)
-    return soluce, rep
+    rep, board = backtrack(board, 0, taille)
+    return board, rep
 
 
 def solve_n_queen_big(taille, board):
@@ -48,3 +46,5 @@ def solve_n_queen_big(taille, board):
 
 def solve_n_queen_all_soluce(taille, board):
     pass
+
+

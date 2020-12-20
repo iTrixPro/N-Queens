@@ -107,7 +107,7 @@ class TestSmall:
         assert nb_queen == board_size
 
 
-class TestMedium:
+"""class TestMedium:
     @pytest.mark.parametrize("board_size", [15, 20])
     def test_solve_N_x_N_with_small_func(self, board_size):
         board = generate_board(board_size)
@@ -155,4 +155,4 @@ class TestAllSoluce:
         for soluce in boards:
             is_a_soluce, nb_queen = is_soluce(board_size, soluce)
             assert is_a_soluce
-            assert nb_queen == board_size
+            assert nb_queen == board_size"""
