@@ -1,3 +1,6 @@
+"""################################################## beginning First solution"""
+
+
 def backtrack(board, col, taille):
     if col == taille:
         return True, board
@@ -13,7 +16,7 @@ def backtrack(board, col, taille):
     return False, board
 
 
-def addQueen(board, row, coll):
+def addQueen(board, row, coll):  # Not sure if it's useful
     if can_t_attack_check(row, coll) is True and board[row][coll] != 1:
         board[row][coll] = 1
         return True
@@ -49,7 +52,7 @@ def can_t_attack_check(board, col, row, taille):  # row and col from the queen's
             return False
     for i, j in zip(range(row + 1, taille), range(col - 1, -1, -1)):
         if board[i][j] == 1:
-            # board[i][j] = 2
+            # board[i][j] = 2 (Tu peux enlever ces commentaire avec les égal 2)
             return False
     return True
 
@@ -59,3 +62,33 @@ def print_board_debug(taille, board):
         for j in range(taille):
             print(" " + str(board[i][j]), end='')
         print()
+
+
+"""################################################## End of First solution"""
+"""################################################## beginning of second solution"""
+
+
+def branchAndBound():  # Le but est d'utiliser des matrices de booléens pour déterminer quels sens sont bloqués
+    pass
+
+
+def isSafe():
+    pass
+
+
+def generate_Array_Helpers(size):
+    return [[0 for x in range(size)] for y in range(size)]
+
+
+def initialize_helpers(taille):
+    oblique = generate_Array_Helpers(taille)
+    obliqueInv = generate_Array_Helpers(taille)
+    ctrlLigne = [False] * taille
+    x = 2 * taille - 1
+    ctrlOblique = [False] * x
+    ctrlObliqueInv = [False] * x
+    for row in range(taille):
+        for col in range(taille):
+            oblique[row][col] = row + col
+            obliqueInv[row][col] = row - col + (taille-1)
+    return oblique, obliqueInv, ctrlLigne, ctrlOblique, ctrlObliqueInv
