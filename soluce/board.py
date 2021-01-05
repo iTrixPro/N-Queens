@@ -16,7 +16,10 @@ class Board:
   Methods:
         getSize() - return the size of the board
         queensCanTattack() - check that none of the queens can attack each others
+        queenCanTattack(row, column) - check if the new queen won't be able to attack an other queen
         getNumberOfQueen() - get the number of queen
+        add(row, column) - add a new queen
+        remove(row, column) - remove a queen
   """
 
   def __init__(self, content, size):
@@ -76,6 +79,33 @@ class Board:
 
     return self.number_of_queen
 
+  def add(self, row, column):
+    """Add a queen on the board.
+
+    Args:
+        row (int): vertical position
+        column (int): horizontal position
+    """
+
+    self.content[row][column] = Queen(row, column)
+    self.number_of_queen += 1
+    self.has_queen = True
+
+  def remove(self, row, column):
+    """Remove a queen on the board.
+
+    Args:
+        row (int): in which row is it
+        column (int): in which column is it
+    """
+
+    self.number_of_queen -= 1
+
+    if self.number_of_queen == 0:
+      self.has_queen = False
+
+    self.content[row][column] = 0
+
   def queensCanTattack(self):
     """Check that none of the Queen objects on the board can attack each others.
 
@@ -101,6 +131,32 @@ class Board:
 
     return can_t_attack
 
+  def queenCanTattack(self, row, column):
+    """Check if the new queen won't be able to attack an other one.
+
+    Args:
+        row (int): vertical position
+        column (int): horizontal position
+
+    Returns:
+        [boolean]: False if can attack an other queen on the board
+    """
+
+    can_t_attack = True
+    if (not self.has_queen):
+      return can_t_attack
+
+    tmp = Queen(row, column)
+    if not self._checkDiagonals(tmp):
+      return not can_t_attack
+
+    queens = self._getQueens()
+    for queen in queens:
+      if queen.getPosY() == tmp.getPosY() or queen.getPosX() == tmp.getPosX():
+        return not can_t_attack
+
+    return can_t_attack
+
   def _getQueens(self):
     """Get all the queens on the board.
 
@@ -108,11 +164,14 @@ class Board:
         [array]: contains all the Queen objects present on the board
     """
     queens = []
-
+    nb_queen_found = 0
     for row in self.content:
       for column in row:
         if isinstance(column, Queen):
           queens.append(column)
+          nb_queen_found += 1
+          if nb_queen_found == self.number_of_queen:
+            break
 
     return queens
 
@@ -126,24 +185,23 @@ class Board:
         [boolean]: False if can attack an other queen
     """
 
-    for row, column in zip(range(queen.getPosX() - 1, -1, -1), range(queen.getPosY() + 1, self.size)):
+    for row, column in zip(range(queen.getPosY() - 1, -1, -1), range(queen.getPosX() + 1, self.size)):
         if isinstance(self.content[row][column], Queen):
             return False
 
-    for row, column in zip(range(queen.getPosX() + 1, self.size), range(queen.getPosY() + 1, self.size)):
+    for row, column in zip(range(queen.getPosY() + 1, self.size), range(queen.getPosX() + 1, self.size)):
         if isinstance(self.content[row][column], Queen):
             return False
 
-    for row, column in zip(range(queen.getPosX() - 1, -1, -1), range(queen.getPosY() - 1, -1, -1)):
+    for row, column in zip(range(queen.getPosY() - 1, -1, -1), range(queen.getPosX() - 1, -1, -1)):
         if isinstance(self.content[row][column], Queen):
             return False
 
-    for row, column in zip(range(queen.getPosX() + 1, self.size), range(queen.getPosY() - 1, -1, -1)):
+    for row, column in zip(range(queen.getPosY() + 1, self.size), range(queen.getPosX() - 1, -1, -1)):
         if isinstance(self.content[row][column], Queen):
             return False
 
     return True
-
 
   def __repr__(self):
     """Representation of the board.

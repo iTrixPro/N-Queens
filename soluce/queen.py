@@ -17,7 +17,7 @@ class Queen:
         getSymbol() - return its symbol
   """
 
-  def __init__(self, x, y):
+  def __init__(self, y, x):
     """Constructs all the necessary attributes for the queen object.
 
     Args:
