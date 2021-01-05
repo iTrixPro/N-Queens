@@ -16,6 +16,7 @@ class Board:
   Methods:
         getSize() - return the size of the board
         queensCanTattack() - check that none of the queens can attack each others
+        getNumberOfQueen() - get the number of queen
   """
 
   def __init__(self, content, size):
@@ -25,10 +26,13 @@ class Board:
         content (array) : starting content of the board
         size (int) : size of the board
         has_queen (boolean) : contains a queen
+        number_of_queen (int)
     """
+
     self.content = None
     self.size = size
     self.has_queen = False
+    self.number_of_queen = 0
     self._setContent(content)
 
   def _setContent(self, content):
@@ -46,6 +50,7 @@ class Board:
       for column in range(self.size):
         if content[row][column] == 1:
           content[row][column] = Queen(row, column)
+          self.number_of_queen += 1
 
           if(not update):
             self.has_queen = True
@@ -61,6 +66,15 @@ class Board:
     """
 
     return self.size
+
+  def getNumberOfQueen(self):
+    """Get the number of queen on the board
+
+    Returns:
+        [int]: number of queen
+    """
+
+    return self.number_of_queen
 
   def queensCanTattack(self):
     """Check that none of the Queen objects on the board can attack each others.
@@ -159,9 +173,3 @@ class Board:
           display += '\n'
 
     return display
-content = [[1, 0, 0, 0],
-           [0, 1, 0, 0],
-           [0, 0, 0, 1],
-           [0, 0, 1, 0]]
-board = Board(content, 4)
-print(board.queensCanTattack())

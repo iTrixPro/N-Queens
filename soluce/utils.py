@@ -37,4 +37,11 @@ def is_soluce(size, board):
       size (int): size of the board
       board (array): 2 dimensional array containing the content of the board
   """
-  pass
+
+  board = Board(board, size)
+  is_soluce = True if board.getNumberOfQueen() == size else False
+
+  if(is_soluce):
+    is_soluce = board.queensCanTattack()
+
+  return is_soluce, board.getNumberOfQueen()
