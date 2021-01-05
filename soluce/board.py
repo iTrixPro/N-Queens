@@ -26,10 +26,10 @@ class Board:
         size (int) : size of the board
         has_queen (boolean) : contains a queen
     """
-
+    self.content = None
     self.size = size
     self.has_queen = False
-    self.content = self._setContent(content)
+    self._setContent(content)
 
   def _setContent(self, content):
     """Setter for the content attribute, will put Queen objects at the place of the 1.
@@ -41,12 +41,17 @@ class Board:
         [array]: final starting content with the 1 remplace by Queen object
     """
 
-    for idx_row, row in enumerate(content):
-      for idx_col, column in enumerate(row):
-        if column == 1:
-          column = Queen(idx_row, idx_col)
+    update = False
+    for row in range(self.size):
+      for column in range(self.size):
+        if content[row][column] == 1:
+          content[row][column] = Queen(row, column)
 
-    return content
+          if(not update):
+            self.has_queen = True
+            update = True
+
+    self.content = content
 
   def getSize(self):
     """Get the size of the board.
@@ -142,15 +147,21 @@ class Board:
     """
     display = ''
 
-    for row in self.content:
+    for idx_row, row in enumerate(self.content):
       for idx_col, column in enumerate(row):
         display += ' '
         if (isinstance(column, Queen)):
           display += column.getSymbol()
         else:
-          display += column
+          display += str(column)
 
-        if idx_col == self.size:
+        if idx_col == self.size - 1 and idx_row != self.size - 1:
           display += '\n'
 
     return display
+content = [[1, 0, 0, 0],
+           [0, 1, 0, 0],
+           [0, 0, 0, 1],
+           [0, 0, 1, 0]]
+board = Board(content, 4)
+print(board.queensCanTattack())
