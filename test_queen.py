@@ -1,8 +1,9 @@
 ##########################################
 # author: MEZROUI Marwan, BULTEZ Victor
 # created: 01/01/2021
-# modified: 01/01/2021
+# modified: 01/05/2021
 ##########################################
+
 from soluce.queen import Queen
 
 def test_getPos():

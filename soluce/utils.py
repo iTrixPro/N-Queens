@@ -1,32 +1,40 @@
 ##########################################
 # author: MEZROUI Marwan, BULTEZ Victor
 # created: 28/12/2020
-# modified: 28/12/2020
+# modified: 05/01/2021
 ##########################################
+
+from soluce.board import Board
 
 def print_board(size, board):
   """Display the board.
 
   Args:
       size (int): size of the board
-      board (int): 2 dimensional array representing the board
+      board (array): 2 dimensional array containing the content of the board
   """
-  pass
+
+  board = Board(board, size)
+  print(board)
 
 def can_t_attack(size, board):
-  """Check none queen can be attacked by another.
+  """Check that none of the queens can attack each others.
 
   Args:
       size (int): size of the board
-      board (int): 2 dimensional array representing the board
+      board (array): 2 dimensional array containing the content of the board
+
+  Returns:
+      [boolean]: True, if none of them can attack
   """
-  pass
+  board = Board(board, size)
+  return board.queensCanTattack()
 
 def is_soluce(size, board):
   """Check solution has been found.
 
   Args:
       size (int): size of the board
-      board (int): 2 dimensional array representing the board
+      board (array): 2 dimensional array containing the content of the board
   """
   pass
