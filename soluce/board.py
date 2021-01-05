@@ -4,7 +4,6 @@
 # modified: 05/01/2020
 ##########################################
 
-from soluce.nqueen_solving import can_t_attack
 from soluce.queen import Queen
 
 class Board:
