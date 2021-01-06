@@ -1,7 +1,7 @@
 ##########################################
 # author: MEZROUI Marwan, BULTEZ Victor
-# created: 28/12/2020
-# modified: 05/01/2020
+# modified: 06/01/2020
+# see: queen.py
 ##########################################
 
 from soluce.queen import Queen
@@ -16,10 +16,7 @@ class Board:
   Methods:
         getSize() - return the size of the board
         queensCanTattack() - check that none of the queens can attack each others
-        queenCanTattack(row, column) - check if the new queen won't be able to attack an other queen
         getNumberOfQueen() - get the number of queen
-        add(row, column) - add a new queen
-        remove(row, column) - remove a queen
   """
 
   def __init__(self, content, size):
@@ -79,33 +76,6 @@ class Board:
 
     return self.number_of_queen
 
-  def add(self, row, column):
-    """Add a queen on the board.
-
-    Args:
-        row (int): vertical position
-        column (int): horizontal position
-    """
-
-    self.content[row][column] = Queen(row, column)
-    self.number_of_queen += 1
-    self.has_queen = True
-
-  def remove(self, row, column):
-    """Remove a queen on the board.
-
-    Args:
-        row (int): in which row is it
-        column (int): in which column is it
-    """
-
-    self.number_of_queen -= 1
-
-    if self.number_of_queen == 0:
-      self.has_queen = False
-
-    self.content[row][column] = 0
-
   def queensCanTattack(self):
     """Check that none of the Queen objects on the board can attack each others.
 
@@ -128,32 +98,6 @@ class Board:
         for victim in queens[it:len(queens)]:
           if attacker.getPosX() == victim.getPosX() or attacker.getPosY() == victim.getPosY():
             return not can_t_attack
-
-    return can_t_attack
-
-  def queenCanTattack(self, row, column):
-    """Check if the new queen won't be able to attack an other one.
-
-    Args:
-        row (int): vertical position
-        column (int): horizontal position
-
-    Returns:
-        [boolean]: False if can attack an other queen on the board
-    """
-
-    can_t_attack = True
-    if (not self.has_queen):
-      return can_t_attack
-
-    tmp = Queen(row, column)
-    if not self._checkDiagonals(tmp):
-      return not can_t_attack
-
-    queens = self._getQueens()
-    for queen in queens:
-      if queen.getPosY() == tmp.getPosY() or queen.getPosX() == tmp.getPosX():
-        return not can_t_attack
 
     return can_t_attack
 
