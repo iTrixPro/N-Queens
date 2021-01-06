@@ -1,11 +1,10 @@
 import pytest
 import time
-from soluce.nqueen_solving import *
+from soluce.nqueen import *
 
 
 def generate_board(size):
     return [[0 for x in range(size)] for y in range(size)]
-
 
 class TestUtils:
     def get_wrong_board_full(self):
@@ -106,8 +105,7 @@ class TestSmall:
         assert is_a_soluce
         assert nb_queen == board_size
 
-
-"""class TestMedium:
+class TestMedium:
     @pytest.mark.parametrize("board_size", [15, 20])
     def test_solve_N_x_N_with_small_func(self, board_size):
         board = generate_board(board_size)
@@ -144,7 +142,7 @@ class TestBig:
         t2 = time.time()
         print(f"\nTest of size {board_size} took {t2 - t1} seconds to be solved")
 
-
+"""
 class TestAllSoluce:
     @pytest.mark.parametrize("board_size, nb_soluce", [(4, 2), (5, 10), (6, 4), (7, 40), (8, 92)])
     def test_solve_N_x_N(self, board_size, nb_soluce):
