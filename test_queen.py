@@ -7,8 +7,8 @@ from soluce.queen import Queen
 
 def test_getPos():
     queen = Queen(5, 8)
-    assert queen.getPosX() == 5
-    assert queen.getPosY() == 8
+    assert queen.getPosX() == 8
+    assert queen.getPosY() == 5
 
 
 def test_getSymbol():
