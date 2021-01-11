@@ -91,7 +91,7 @@ def solve_n_queen_big(size, board):
       [array]: final board
       [boolean]: success or not
     """
-    
+
     oblique, oblique_inv = initObliques(size)
     ctrl_line, ctrl_oblique, ctrl_obliqueinv = initCtrl(size)
 
@@ -109,7 +109,7 @@ def solve_n_queen_all_soluce(size, board):
     Returns:
       [array]: containing all the solution
     """
-    
+
     boards = []
     boards = backtrackingAllSoluce(board, 0, size, boards)
     return boards
