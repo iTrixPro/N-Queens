@@ -5,6 +5,7 @@
 # needed by solving.py and nqueen.py
 ##########################################
 
+
 def queenCanTattack(board, size, row, column):
     """Check if the new queen will not be able to attack an other one.
 

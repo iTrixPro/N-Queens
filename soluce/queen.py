@@ -3,6 +3,7 @@
 # modified: 11/01/2020
 ##########################################
 
+
 class Queen:
     """A class to represent a queen.
 
