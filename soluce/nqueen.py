@@ -1,6 +1,6 @@
 ##########################################
 # author: MEZROUI Marwan, BULTEZ Victor
-# modified: 05/01/2021
+# modified: 11/01/2021
 # see: board.py, solving.py
 # description: main file,
 # contains all the main functions needed for the N-Queen problem
@@ -81,7 +81,17 @@ def solve_n_queen_small(size, board):
 
 
 def solve_n_queen_big(size, board):
+    """Solve the problem for a big board.
 
+    Args:
+      size (int): size of the board
+      board (array): 2 dimensional array containing the content of the board
+
+    Returns:
+      [array]: final board
+      [boolean]: success or not
+    """
+    
     oblique, oblique_inv = initObliques(size)
     ctrl_line, ctrl_oblique, ctrl_obliqueinv = initCtrl(size)
 
@@ -90,6 +100,16 @@ def solve_n_queen_big(size, board):
 
 
 def solve_n_queen_all_soluce(size, board):
+    """Give all the solution of the problem.
+
+    Args:
+      size (int): size of the board
+      board (array): 2 dimensional array containing the content of the board
+
+    Returns:
+      [array]: containing all the solution
+    """
+    
     boards = []
     boards = backtrackingAllSoluce(board, 0, size, boards)
     return boards
