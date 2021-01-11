@@ -2,79 +2,94 @@
 # author: MEZROUI Marwan, BULTEZ Victor
 # modified: 05/01/2021
 # see: board.py, solving.py
-# description: main file, contains all the functions needed for the N-Queen problem
+# description: main file,
+# contains all the main functions needed for the N-Queen problem
 ##########################################
 
 from soluce.board import Board
-from soluce.solving import *
+from soluce.solving import (
+  backtracking, branchAndBound, backtrackingAllSoluce
+)
+from soluce.utils import (
+  initObliques, initCtrl
+)
+
 
 def print_board(size, board):
-  """Display the board.
+    """Display the board.
 
-  Args:
+    Args:
       size (int): size of the board
       board (array): 2 dimensional array containing the content of the board
-  """
+    """
 
-  if not isinstance(board, Board):
-    board = Board(board, size)
+    if not isinstance(board, Board):
+        board = Board(board, size)
 
-  print(board)
+    print(board)
+
 
 def can_t_attack(size, board):
-  """Check that none of the queens can attack each others.
+    """Check that none of the queens can attack each others.
 
-  Args:
+    Args:
       size (int): size of the board
       board (array): 2 dimensional array containing the content of the board
 
-  Returns:
+    Returns:
       [boolean]: True, if none of them can attack
-  """
+    """
 
-  if not isinstance(board, Board):
-    board = Board(board, size)
+    if not isinstance(board, Board):
+        board = Board(board, size)
 
-  return board.queensCanTattack()
+    return board.queensCanTattack()
+
 
 def is_soluce(size, board):
-  """Check solution has been found.
+    """Check solution has been found.
 
-  Args:
+    Args:
       size (int): size of the board
       board (array): 2 dimensional array containing the content of the board
-  """
+    """
 
-  if not isinstance(board, Board):
-    board = Board(board, size)
+    if not isinstance(board, Board):
+        board = Board(board, size)
 
-  is_soluce = True if board.getNumberOfQueen() == size else False
+    is_soluce = True if board.getNumberOfQueen() == size else False
 
-  if(is_soluce):
-    is_soluce = board.queensCanTattack()
+    if(is_soluce):
+        is_soluce = board.queensCanTattack()
 
-  return is_soluce, board.getNumberOfQueen()
+    return is_soluce, board.getNumberOfQueen()
+
 
 def solve_n_queen_small(size, board):
-  """Solve the problem for a small board.
+    """Solve the problem for a small board.
 
-  Args:
+    Args:
       size (int): size of the board
       board (array): 2 dimensional array containing the content of the board
 
-  Returns:
+    Returns:
       [array]: final board
       [boolean]: success or not
-  """
+    """
 
-  return backtracking(board, 0, size)
+    return backtracking(board, 0, size)
+
 
 def solve_n_queen_big(size, board):
 
-  oblique, obliqueInv = initObliques(size)
-  ctrlOblique, ctrlObliqueInv = initCtrl(size)
+    oblique, oblique_inv = initObliques(size)
+    ctrl_line, ctrl_oblique, ctrl_obliqueinv = initCtrl(size)
 
-  return branchAndBound(board, 0, size, oblique, obliqueInv, ctrlOblique, ctrlObliqueInv)
+    return branchAndBound(board, 0, size, oblique, oblique_inv,
+                          ctrl_line, ctrl_oblique, ctrl_obliqueinv)
+
 
 def solve_n_queen_all_soluce(size, board):
-  pass
+    boards = []
+    boards = backtrackingAllSoluce(board, 0, size, boards)
+    return boards
