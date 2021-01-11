@@ -1,58 +1,57 @@
 ##########################################
 # author: MEZROUI Marwan, BULTEZ Victor
-# modified: 05/01/2020
+# modified: 11/01/2020
 ##########################################
 
 class Queen:
-  """A class to represent a queen.
+    """A class to represent a queen.
 
-  Attributes:
+    Attributes:
         positionX (int) : its horizontal position on the board
         positionY (int) : its vertical position on the board
         symbol (int) : its symbol on the board
-  Methods:
+    Methods:
         getPosX() - return its horizontal position
         getPosY() - return its vertical position
         getSymbol() - return its symbol
-  """
-
-  def __init__(self, y, x):
-    """Constructs all the necessary attributes for the queen object.
-
-    Args:
-        positionX (int): horizontal position
-        positionY (int): vertical position
-        symbol (int): representation on the board
     """
 
-    self.positionX = x
-    self.positionY = y
-    self.symbol = 1
+    def __init__(self, y, x):
+        """Constructs all the necessary attributes for the queen object.
 
-  def getPosX(self):
-    """Get its horizontal position on the board.
+        Args:
+          positionX (int): horizontal position
+          positionY (int): vertical position
+          symbol (int): representation on the board
+        """
 
-    Returns:
-        [int]: horizontal position
-    """
+        self.positionX = x
+        self.positionY = y
+        self.symbol = 1
 
-    return self.positionX
+    def getPosX(self):
+        """Get its horizontal position on the board.
 
+        Returns:
+          [int]: horizontal position
+        """
 
-  def getPosY(self):
-    """Get its vertical position on the board.
+        return self.positionX
 
-    Returns:
-        [int]: vertical position
-    """
+    def getPosY(self):
+        """Get its vertical position on the board.
 
-    return self.positionY
+        Returns:
+          [int]: vertical position
+        """
 
-  def getSymbol(self):
-    """Get its representation in the board.
+        return self.positionY
 
-    Returns:
-        [int]: on the board the queen is represent by an int
-    """
+    def getSymbol(self):
+        """Get its representation in the board.
 
-    return self.symbol
+        Returns:
+          [int]: on the board the queen is represent by an int
+        """
+
+        return self.symbol
