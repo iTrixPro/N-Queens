@@ -1,6 +1,6 @@
 import pytest
 import time
-from nqueen_solving import (
+from soluce.nqueen import (
     is_soluce, print_board, solve_n_queen_small,
     solve_n_queen_big, solve_n_queen_all_soluce, can_t_attack
 )
