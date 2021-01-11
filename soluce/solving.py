@@ -5,9 +5,9 @@
 # description: Contains the different algorithms used
 # to resolve the N-Queen problem
 ##########################################
-
+import copy
 from soluce.utils import (
-    queenCanTattack, isSafe
+    queenCanTattack, isSafe, is_soluce
 )
 
 
@@ -106,10 +106,13 @@ def backtrackingAllSoluce(board, column, size, boards):
     """
 
     if column == size:
+        if is_soluce(size, board):
+            result = copy.deepcopy(board)
+            boards.append(result)
         return boards
 
     for row in range(size):
-        if queenCanTattack(board, size, row, column) is True:
+        if queenCanTattack(board, size, row, column):
             board[row][column] = 1
             boards = backtrackingAllSoluce(board, column + 1, size, boards)
             board[row][column] = 0
