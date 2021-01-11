@@ -20,7 +20,7 @@ N-Queens> python -m pip install flake8<br />
 N-Queens> flake8
 
 * to launch the tests :<br />
-N-Queens> python -m pip install -U pytes<br />
+N-Queens> python -m pip install -U pytest<br />
 N-Queens> pytest test_name.py
 
 # Linux Configuration 
