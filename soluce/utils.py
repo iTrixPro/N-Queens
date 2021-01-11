@@ -1,112 +1,165 @@
 ##########################################
 # author: MEZROUI Marwan, BULTEZ Victor
 # modified: 06/01/2020
-# descritpion: contains all the utilities functions needed by solving.py and nqueen.py
+# descritpion: contains all the utilities functions
+# needed by solving.py and nqueen.py
 ##########################################
 
 def queenCanTattack(board, size, row, column):
-  """Check if the new queen will not be able to attack an other one.
+    """Check if the new queen will not be able to attack an other one.
 
-  Args:
+    Args:
       board (array): board on which the queen will be
       size (int): size of the board
       row (int): row position on the board
       column (int): column position on the board
 
-  Returns:
+    Returns:
       [boolean]: True, if unable to attack
-  """
+    """
 
-  can_t_attack = True
+    can_t_attack = True
 
-  # check cardinals
-  for idx_row in range(size):
-      if idx_row != row and board[idx_row][column] == 1:
-          return not can_t_attack
+    # check cardinals
+    for idx_row in range(size):
+        if idx_row != row and board[idx_row][column] == 1:
+            return not can_t_attack
 
-  for idx_column in range(size):
-      if idx_column != column and board[row][idx_column] == 1:
-          return not can_t_attack
+    for idx_column in range(size):
+        if idx_column != column and board[row][idx_column] == 1:
+            return not can_t_attack
 
-  # check diagonals
-  for idx_row, idx_column in zip(range(row - 1, -1, -1), range(column + 1, size)):
-      if board[idx_row][idx_column] == 1:
-          return not can_t_attack
+    # check diagonals
+    for idx_row, idx_column in zip(range(row - 1, -1, -1),
+                                   range(column + 1, size)):
+        if board[idx_row][idx_column] == 1:
+            return not can_t_attack
 
-  for idx_row, idx_column in zip(range(row + 1, size), range(column + 1, size)):
-      if board[idx_row][idx_column] == 1:
-          return not can_t_attack
+    for idx_row, idx_column in zip(range(row + 1, size),
+                                   range(column + 1, size)):
+        if board[idx_row][idx_column] == 1:
+            return not can_t_attack
 
-  for idx_row, idx_column in zip(range(row - 1, -1, -1), range(column - 1, -1, -1)):
-      if board[idx_row][idx_column] == 1:
-          return not can_t_attack
+    for idx_row, idx_column in zip(range(row - 1, -1, -1),
+                                   range(column - 1, -1, -1)):
+        if board[idx_row][idx_column] == 1:
+            return not can_t_attack
 
-  for idx_row, idx_column in zip(range(row + 1, size), range(column - 1, -1, -1)):
-      if board[idx_row][idx_column] == 1:
-          return not can_t_attack
+    for idx_row, idx_column in zip(range(row + 1, size),
+                                   range(column - 1, -1, -1)):
+        if board[idx_row][idx_column] == 1:
+            return not can_t_attack
 
-  return can_t_attack
+    return can_t_attack
 
-def isSafe(row, col, oblique, oblique_inv, ctrl_oblique, ctrl_obliqueinv):
-  """[summary]
 
-  Args:
-      row ([type]): [description]
-      col ([type]): [description]
-      oblique ([type]): [description]
-      oblique_inv ([type]): [description]
-      ctrl_oblique ([type]): [description]
-      ctrl_obliqueinv ([type]): [description]
+def isSafe(row,
+           column,
+           oblique,
+           oblique_inv,
+           ctrl_line,
+           ctrl_oblique,
+           ctrl_obliqueinv):
+    """Check if it is safe to put a queen at that position
 
-  Returns:
-      [type]: [description]
-  """
-  if ctrl_oblique[oblique[row][col]] or ctrl_obliqueinv[oblique_inv[row][col]] or ctrl_obliqueinv[row]:
-      return False
-  return True
+    Args:
+      row (int): row number
+      column (int): column number
+      oblique (array): for the diagionales
+      oblique_inv (array): for the diagionales
+      ctrl_line (array): for the rows
+      ctrl_oblique (array): for the diagionales
+      ctrl_obliqueinv (array): for the diagionales
+
+    Returns:
+      [boolean]: is-it safe to put a queen at that position
+    """
+
+    if ctrl_oblique[oblique[row][column]] or \
+       ctrl_obliqueinv[oblique_inv[row][column]] or ctrl_line[row]:
+        return False
+    return True
+
+
+def is_soluce(size, board):
+    """Check if the board is one of the soluce.
+
+    Args:
+        size (int): size of the board
+        board (array): content of the board
+
+    Returns:
+        [boolean]: is-it a solution ?
+    """
+
+    nbQueen = 0
+    for row in range(size):
+        for column in range(size):
+            if board[row][column] == 1:
+                nbQueen += 1
+
+    for row in range(size):
+        for column in range(size):
+            if board[row][column] == 1 and \
+               not queenCanTattack(board, size, row, column):
+                return False
+
+    if nbQueen == size:
+        return True
+    else:
+        return False
+
 
 def initCtrl(size):
-  """Init...
+    """Init array usefull to check the diagionales and the lines
 
-  Args:
+    Args:
       size (int): size of the board
 
-  Returns:
-      [type]: [description]
-  """
-  x = 2 * size - 1
-  ctrl_oblique = [False] * x
-  ctrl_obliqueinv = [False] * x
+    Returns:
+      [array]: ctrl_line
+      [array]: ctrl_oblique
+      [array]: ctrl_obliqueinv
+    """
 
-  return ctrl_oblique, ctrl_obliqueinv
+    x = 2 * size - 1
+    ctrl_oblique = [False] * x
+    ctrl_obliqueinv = [False] * x
+    ctrl_line = [False] * size
+
+    return ctrl_line, ctrl_oblique, ctrl_obliqueinv
+
 
 def initObliques(size):
-  """Init...
+    """Init of array needed by ctrl_oblique and ctrl_obliqueinv
 
-  Args:
+    Args:
       size (int): size of the board
 
-  Returns:
-      [type]: [description]
-  """
-  oblique = generateArray(size)
-  oblique_inv = generateArray(size)
+    Returns:
+      [array]: oblique
+      [array]: oblique_inv
+    """
 
-  for row in range(size):
-      for column in range(size):
-          oblique[row][column] = row + column
-          oblique_inv[row][column] = row - column + (size -1)
+    oblique = generateArray(size)
+    oblique_inv = generateArray(size)
 
-  return oblique, oblique_inv
+    for row in range(size):
+        for column in range(size):
+            oblique[row][column] = row + column
+            oblique_inv[row][column] = row - column + (size - 1)
+
+    return oblique, oblique_inv
+
 
 def generateArray(size):
-  """Return a 2D array full of 0.
+    """Return a 2D array full of 0.
 
-  Args:
+    Args:
       size (int): number of row and number of column
 
-  Returns:
+    Returns:
       [array]: 2D array full of 0
-  """
+    """
 
-  return [[0 for x in range(size)] for y in range(size)]
+    return [[0 for x in range(size)] for y in range(size)]
