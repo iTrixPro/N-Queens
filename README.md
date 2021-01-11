@@ -5,11 +5,11 @@
 
 # About 
 
-* The test :<br />
+* The tests :<br />
 test_queen.py is working<br />
 test_nqueen.py is working except for the test using the function solve_n_queen_big(size, board)
 
-* Trespect of PEP8 :<br />
+* The respect of PEP8 :<br />
 It should have beend respected for every files<br />
 Normally when you will use the command flake8 nothing will be showed
 
